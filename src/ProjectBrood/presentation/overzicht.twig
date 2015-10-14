@@ -1,0 +1,60 @@
+{% extends "maintemplate.twig" %}
+
+{% block content %}
+
+    <section class="clearFix">
+        <div class="container">
+            <h1 class="headLine">Welkom bij broodjes-online</h1>
+            <h3 class="sectionHeadLine">Stap 3: Overzicht van broodjes:</h3>
+        </div>
+    </section>
+
+    <form action="#" method="post">
+    {% for key, itemVanOverzicht in overzicht %}
+    <section class="clearFix">
+        <div class="container">
+            <article class="clearFix">
+                <a class="productImageLink" href="#">
+                    <img class="productImage" src="src/ProjectBrood/presentation/img/{{ itemVanOverzicht.brood_image }}" alt="broodje"/>
+                </a>
+                <div class="productContent clearFix">
+                    <h1 class="productHeadLine">
+                        {{ itemVanOverzicht.brood_naam }} met
+                        <span class="lowerCase">
+                            {% for eenBeleg in itemVanOverzicht.beleg %}
+                                {{ eenBeleg }},
+                            {% endfor %}
+                        </span>
+                    </h1>
+                    <a class="verwijderKnoop show-login" href="verwijder.php?id={{ key }}">Verwijder</a>
+                    <h3 class="productDiscription">
+                        Prijs: {{ itemVanOverzicht.sandwichPrijs }}€
+                    </h3>
+                </div>
+
+                <div class="aantalBroodjes clearFix">
+                       <input type="number" min="1" name="{{ key }}" value="{{ itemVanOverzicht.aantal }}"/>
+                </div>
+            </article>
+        </div>
+
+    </section>
+
+    {% endfor %}
+    <section class="clearFix">
+        <div class="container">
+            <h3 class="totaalPrijs clearFix">Totaal prijs: {{ totaalBestellingPrijs }}€</h3>
+            <input class="aantalBroodjesRefresh clear" type="submit" name="vernieuwen" value="Vernieuwen"/>
+            <h3 class="errorVanAantal">{{ errorMessage }}</h3>
+        </div>
+    </section>
+
+    <section class="clearFix">
+        <div class="controlKnopen clearFix">
+            <a class="verderWinkelenKnoop" href="index.php">Verder winkelen</a>
+            <a class="bestellingPlaatsenKnoop" href="bestelling.php">Bestelling plaatsen</a>
+        </div>
+    </section>
+    </form>
+
+{% endblock %}
